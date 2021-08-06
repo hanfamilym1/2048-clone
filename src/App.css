@@ -1,0 +1,125 @@
+.App {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.header {
+  width: 500px;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+  align-items: center;
+}
+
+.scoreBoard {
+  background-color: #bbada0;
+  color: #fff;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.scoreBoard h3,
+.scoreBoard p {
+  margin: 0;
+}
+
+.board {
+  width: 400px;
+  height: 500px;
+  overflow: scroll;
+}
+.game-board {
+  background-color: #bbada0;
+  font-size: 50px;
+  display: flex;
+  width: 500px;
+  height: 500px;
+  flex-wrap: wrap;
+  border-radius: 10px;
+}
+
+.piece {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 12px;
+  border-radius: 10px;
+}
+
+.end {
+  z-index: 10;
+  width: 500px;
+  height: 500px;
+  background-color: #fff;
+  opacity: 0.6;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.zero {
+  background-color: #cdc1b4;
+}
+
+.two {
+  background-color: #eee4da;
+  color: #776e65;
+}
+.four {
+  background-color: #ede0c8;
+  color: #776e65;
+}
+.eight {
+  background-color: #f3b27a;
+  color: #fff;
+}
+.sixteen {
+  background-color: #f3b27a;
+  color: #fff;
+}
+.thirtytwo {
+  background-color: #f77c5f;
+  color: #fff;
+}
+.sixtyfour {
+  background-color: #f75f3b;
+  color: #fff;
+}
+
+.onetwentyeight {
+  background-color: #edd073;
+  color: #fff;
+}
+
+.twofiftysix {
+  background-color: #0c6291;
+  color: #fff;
+}
+
+.fivetwelve {
+  background-color: #7f7eff;
+  color: #fff;
+}
+.tentwentyfour {
+  background-color: #bda0bc;
+  color: #fff;
+  font-size: 40px;
+}
+.twentyfortyeight {
+  background-color: #566246;
+  color: #fff;
+  font-size: 40px;
+}
