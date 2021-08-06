@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Getting Started with 2048 Clone
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was created in React, Material UI.
 
 ## Available Scripts
 
