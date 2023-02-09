@@ -1,31 +1,21 @@
 export const addRandomPieces = (actualBoard) => {
-    let newBoard = actualBoard.filter(piece => piece.value === 0)
-    let randomNumbers = [2,4]
-    let randomNumber1 = randomNumbers[Math.floor(Math.random()*2)]
-    // let randomNumber2 = randomNumbers[Math.floor(Math.random()*2)]
-    let randomI1 = Math.floor(Math.random()*newBoard.length);
-    // let randomI2 = Math.floor(Math.random()*newBoard.length);
-    // if(randomI1 === randomI2){
-    //     randomI2 = Math.floor(Math.random()*newBoard.length)
-    // }
-    for (let i =0; i<newBoard.length; i++){
-        if(i === randomI1){
-            newBoard[i].value = randomNumber1
-        } 
-    }
-    console.log(newBoard)
-    let addedItems = newBoard.filter(piece => piece.value !== 0)
-    let returnedBoard = [];
-    for (let j=0; j<addedItems.length; j++){
-        returnedBoard = actualBoard.map(piece => {
-            if(addedItems[j].row === piece.row && addedItems[j].col === piece.col){
-                return addedItems[j]
-            } else {
-                return piece
-            }
-        })
-    }
-    // console.log(actualBoard)
-    // console.log(returnedBoard)
+    const returnedBoard = [...actualBoard]
+    const randomNumbers = [2, 4]
+    
+    // find all the indexes of the board that are 0
+    const zeroIndexes = actualBoard.reduce((acc, curr, index) => {
+        if(curr === 0){
+            acc.push(index)
+        }
+        return acc
+    }, [])
+
+    console.log(zeroIndexes)
+    // pick a random index from the zeroIndexes array
+    const randomIndex = zeroIndexes[Math.floor(Math.random() * zeroIndexes.length)]
+    // pick a random number from the randomNumbers array
+    const randomNumber = randomNumbers[Math.floor(Math.random() * 2)]
+    // add the random number to the random index
+    returnedBoard[randomIndex] = randomNumber
     return returnedBoard
 }
