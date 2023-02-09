@@ -21,27 +21,28 @@ const ColorButton = withStyles((theme) => ({
 const App = () => {
   const [actualGame, setActualGame] = useState(InitializeGame())
   const [score, setScore] = useState(0)
-  const [isEnd, setIsEnd] = useState(true)
+  const [isEnd, setIsEnd] = useState(false)
   const [isWon, setIsWon] = useState(false)
 
   useEffect(()=>{
-    let isFinished = checkGame(actualGame)
-    console.log(isFinished)
-    if(isFinished.won) {
-      setIsWon(true)
-      setIsEnd(false)  
-    } else {
-      isFinished.end ? setIsEnd(true) : setIsEnd(false);
+    if(score !== 0){
+      let isFinished = checkGame(actualGame)
+      console.log(isFinished)
+      if(isFinished.won) {
+        setIsWon(true)
+        setIsEnd(false)  
+      } else {
+        isFinished.end ? setIsEnd(true) : setIsEnd(false);
+      } 
     }
-
-  }, [actualGame])
+  }, [score, actualGame])
 
 
   const startGame = () => {
     setScore(0)
+    setActualGame(InitializeGame())
     setIsWon(false)
     setIsEnd(false)
-    setActualGame(InitializeGame())
   }
 
   const checkEqual = (first, second) => {
@@ -54,7 +55,7 @@ const App = () => {
 
   const showBoard = actualGame.map((piece,index) => {
     var actualName;
-    switch(piece.value){
+    switch(piece){
       case 0:
         actualName=`zero piece`
         break;
@@ -97,7 +98,7 @@ const App = () => {
 
     return (
       <div key={index} className={actualName}>
-          {piece.value === 0 ? null: piece.value}
+          {piece === 0 ? null: piece}
       </div>
     )   
   })
@@ -110,39 +111,19 @@ const App = () => {
       switch(e.keyCode){
         case 37:
           console.log('left');
-          let {points, board} = left(actualGame)
-          moveBoard = [...board]
-          setScore(prevScore => prevScore += points)
-          isEqual = checkEqual(moveBoard, actualGame)
-          isEqual ? newBoard = [...moveBoard] : newBoard = addRandomPieces(moveBoard)
-          setActualGame(newBoard)
+          moveBoard = left(actualGame);
+          setScore(currPoints => currPoints+=moveBoard.points);
+          newBoard = addRandomPieces(moveBoard.board);
+          setActualGame(newBoard);
           break;
         case 38:
           console.log('up');
-          let upObj = up(actualGame)
-          moveBoard = [...upObj.board]
-          setScore(prevScore => prevScore += upObj.points)
-          isEqual = checkEqual(moveBoard, actualGame)
-          isEqual ? newBoard = [...moveBoard] : newBoard = addRandomPieces(moveBoard)
-          setActualGame(newBoard)
           break;
         case 39:
           console.log('right')
-          let rightObj = right(actualGame)
-          moveBoard = [...rightObj.board]
-          setScore(prevScore => prevScore += rightObj.points)
-          isEqual = checkEqual(moveBoard, actualGame)
-          isEqual ? newBoard = [...moveBoard] : newBoard = addRandomPieces(moveBoard)
-          setActualGame(newBoard)
           break;
         case 40:
           console.log('down')
-          let downObj = down(actualGame)
-          moveBoard = [...downObj.board]
-          setScore(prevScore => prevScore += downObj.points)
-          isEqual = checkEqual(moveBoard, actualGame)
-          isEqual ? newBoard = [...moveBoard] : newBoard = addRandomPieces(moveBoard)
-          setActualGame(newBoard)
           break;
         default:
           return null;
