@@ -1,10 +1,18 @@
-export const InitializeGame = () => {
-    const board = Array(16).fill(0)
+export const initializeGame = () => {
+  const board = [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+  ];
 
-    const randomIndex = Math.floor(Math.random() * board.length)
-    const randomNumbers = [2, 4]
-    const randomNumber = randomNumbers[Math.floor(Math.random() * 2)]
-    board[randomIndex] = randomNumber
+  const numRows = board.length;
+  const numCols = board[0].length;
+  const randomRowIndex = Math.floor(Math.random() * numRows);
+  const randomColIndex = Math.floor(Math.random() * numCols);
+  const randomNumbers = [2, 4];
+  const randomNumber = randomNumbers[Math.floor(Math.random() * 2)];
+  board[randomRowIndex][randomColIndex] = randomNumber;
 
-    return board
-}
+  return board;
+};

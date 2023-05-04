@@ -1,89 +1,66 @@
-const changeLeftRow = (row) => {
-  // start from the end of the row and add if equals to the previous one
-  let points = 0;
-  for (let i = row.length-1; i>=0; i--){
-    if(row[i] === 0){
-      row.splice(i, 1)
-    }
-  }
-  for (let i = row.length-1; i>0; i--){
-    if(row[i] === row[i-1]){
-      row[i-1] = row[i-1] * 2
-      points += row[i-1]
-      row.splice(i, 1)
-    }
-  }
-  for (let i = row.length-1; i>=0; i--){
-    if(row[i] === 0){
-      row.splice(i, 1)
-    }
-  }
-  while(row.length < 4){
-    row.push(0)
-  }
-  return {points, row}
-} 
+const filterZero = (row) => row.filter((num) => num !== 0);
 
-const changeRightRow = (row) => {
+function slide(row) {
+  // [0,2,2,2]
+  row = filterZero(row); // get rid of zeros
+  // slide
+  let score = 0;
+  for (let i = 0; i < row.length - 1; i++) {
+    if (row[i] === row[i + 1]) {
+      row[i] *= 2;
+      row[i + 1] = 0;
+      score += row[i];
+    }
+  }
 
+  row = filterZero(row); // [4,2]
+
+  const column = 4;
+
+  while (row.length < column) {
+    row.push(0);
+  }
+  return { points: score, row };
 }
-
-const changeUpCol = (col) => {
-   
-} 
-
-const changeDownCol = (col) => {
-  
-}
-
 
 export const left = (actualBoard) => {
-    let newBoard = []
-    let points1 = 0;
-    for (let i = 0; i<16; i+=4){
-      let row1 = actualBoard.slice(i, i+4);
-      let {points, row} = changeLeftRow(row1)
-      points1+=points
-      newBoard.push(...row)
+  let newObj = {
+    board: actualBoard,
+    points: 0,
+  };
+  for (const rowIndex in actualBoard) {
+    // if every number is 0, skip
+    if (!actualBoard[rowIndex].every((num) => num === 0)) {
+      console.log("not skipped", actualBoard[rowIndex]);
+      const { row, points } = slide(actualBoard[rowIndex]);
+      actualBoard[rowIndex] = row;
+      newObj = {
+        board: actualBoard,
+        points: newObj.points + points,
+      };
     }
-    console.log(newBoard)
-    return {points: points1, board: newBoard}
   }
-  
-  export const right = (actualBoard) => {
-    let newBoard = []
-    let points1 = 0;
-    for (let i = 0; i<4; i++){
-        let row1 = actualBoard.filter(piece => piece.row === i)
-        let {points, row} = changeRightRow(row1)
-        points1+=points
-        newBoard.push(...row)
-    }
-    return {points: points1, board: newBoard}
-}
+  return newObj;
+};
 
-export const up = (actualBoard) => {
-    let newBoard = []
-    let points1 = 0;
-    for (let i = 0; i<4; i++){
-        let col1 = actualBoard.filter(piece => piece.col === i)
-        let {points, col} = changeUpCol(col1)
-        points1 += points
-        newBoard.push(...col)
-    }
-    newBoard.sort((a,b) => a.row - b.row)
-    return {points: points1, board: newBoard}
-}
+export const right = (actualBoard) => {
+  let newObj = {
+    board: actualBoard,
+    points: 0,
+  };
 
-export const down = (actualBoard) => {
-    let newBoard = []
-    let points1 = 0;
-    for (let i = 0; i<4; i++){
-        let col1 = actualBoard.filter(piece => piece.col === i)
-        let {points, col} = changeDownCol(col1)
-        points1 += points
-        newBoard.push(...col)
+  for (const rowIndex in actualBoard) {
+    // if every number is 0, skip
+    if (!actualBoard[rowIndex].every((num) => num === 0)) {
+      let row = actualBoard[rowIndex];
+      row.reverse();
+      const { row: newRow, points } = slide(row);
+      actualBoard[rowIndex] = newRow.reverse();
+      newObj = {
+        board: actualBoard,
+        points: newObj.points + points,
+      };
     }
-    newBoard.sort((a,b) => a.row - b.row)
-    return {points: points1, board: newBoard}
-}
+  }
+  return newObj;
+};
