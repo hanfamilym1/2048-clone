@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Board from "./components/Board";
-import initializeGame from "./GameFunctions/initializeGame";
-import { left, right, down, up } from "./GameFunctions/moveBoard";
-import { addRandomPieces } from "./GameFunctions/addItems";
-import { checkGame } from "./GameFunctions/checkGame";
+import initializeGame from "./GameFunctions/initializeGame.js";
+import { left, right, down, up } from "./GameFunctions/moveBoard.js";
+import { addRandomPieces } from "./GameFunctions/addItems.js";
+import { checkGame } from "./GameFunctions/checkGame.js";
 import Button from "@mui/material/Button";
 // import ReplayIcon from "@material-ui/icons/Replay";
 // import { withStyles } from "@material-ui/styles";
