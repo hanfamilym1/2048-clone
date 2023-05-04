@@ -1,4 +1,4 @@
-export const initializeGame = () => {
+const initializeGame = () => {
   const board = [
     [0, 0, 0, 0],
     [0, 0, 0, 0],
@@ -16,3 +16,5 @@ export const initializeGame = () => {
 
   return board;
 };
+
+export default initializeGame;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Board from "./components/Board";
-import { initializeGame } from "./GameFunctions/initializeData";
+import initializeGame from "./GameFunctions/initializeGame";
 import { left, right, down, up } from "./GameFunctions/moveBoard";
 import { addRandomPieces } from "./GameFunctions/addItems";
 import { checkGame } from "./GameFunctions/checkGame";
