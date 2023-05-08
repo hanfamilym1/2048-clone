@@ -64,3 +64,59 @@ export const right = (actualBoard) => {
   }
   return newObj;
 };
+
+export const up = (actualBoard) => {
+  let newObj = {
+    board: actualBoard,
+    points: 0,
+  };
+  for (const rowIndex in actualBoard) {
+    // if every number is 0, skip
+    let newRow = [
+      actualBoard[0][rowIndex],
+      actualBoard[1][rowIndex],
+      actualBoard[2][rowIndex],
+      actualBoard[3][rowIndex],
+    ];
+    const { row, points } = slide(newRow);
+
+    actualBoard[0][rowIndex] = row[0];
+    actualBoard[1][rowIndex] = row[1];
+    actualBoard[2][rowIndex] = row[2];
+    actualBoard[3][rowIndex] = row[3];
+
+    newObj = {
+      board: actualBoard,
+      points: newObj.points + points,
+    };
+  }
+  return newObj;
+};
+
+export const down = (actualBoard) => {
+  let newObj = {
+    board: actualBoard,
+    points: 0,
+  };
+  for (const rowIndex in actualBoard) {
+    // if every number is 0, skip
+    let newRow = [
+      actualBoard[3][rowIndex],
+      actualBoard[2][rowIndex],
+      actualBoard[1][rowIndex],
+      actualBoard[0][rowIndex],
+    ];
+    const { row, points } = slide(newRow);
+
+    actualBoard[3][rowIndex] = row[0];
+    actualBoard[2][rowIndex] = row[1];
+    actualBoard[1][rowIndex] = row[2];
+    actualBoard[0][rowIndex] = row[3];
+
+    newObj = {
+      board: actualBoard,
+      points: newObj.points + points,
+    };
+  }
+  return newObj;
+};

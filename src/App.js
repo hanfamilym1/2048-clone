@@ -71,6 +71,10 @@ const App = () => {
           break;
         case 38:
           console.log("up");
+          moveBoard = up(actualGame);
+          setScore((currPoints) => (currPoints += moveBoard.points));
+          newBoard = addRandomPieces(moveBoard.board);
+          setActualGame(newBoard);
           break;
         case 39:
           console.group("right");
@@ -82,6 +86,10 @@ const App = () => {
           break;
         case 40:
           console.log("down");
+          moveBoard = down(actualGame);
+          setScore((currPoints) => (currPoints += moveBoard.points));
+          newBoard = addRandomPieces(moveBoard.board);
+          setActualGame(newBoard);
           break;
         default:
           return null;
